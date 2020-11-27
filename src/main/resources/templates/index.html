@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<a th:href="@{/reg}">Registration</a>
+
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Name book</th>
+        <th>FirstName author</th>
+        <th>LastName author</th>
+        <th>Year</th>
+        <th>Quantity page</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody th:each="item : ${books}">
+    <tr>
+        <td th:text="${item.nameBook}"></td>
+        <td th:text="${item.firstName}" id></td>
+        <td th:text="${item.lastName}" id></td>
+        <td th:text="${item.year}"></td>
+        <td th:text="${item.quantityPage}"></td>
+        <td th:text="${item.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${authorities == null}">
+    <br>
+    <form th:action="@{/auth/logout}" method="post">
+        <button type="submit">Sign Out</button>
+    </form>
+</div>
+
+</body>
+</html>
