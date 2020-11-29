@@ -1,15 +1,13 @@
 package by.tms.bookstorecourseworkc33.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "books")
 public class Book {
@@ -25,8 +23,20 @@ public class Book {
     private int quantityPage;
     @Column(name = "price", nullable = false)
     private BigDecimal price;
-    @Column(name = "first_name", length = 50, nullable = false)
-    private String firstName;
-    @Column(name = "last_name", length = 100, nullable = false)
-    private String lastName;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private List<Author> authors;
+
+    public Book(long id, String nameBook, int year, int quantityPage, BigDecimal price, List<Author> authors) {
+        this.id = id;
+        this.nameBook = nameBook;
+        this.year = year;
+        this.quantityPage = quantityPage;
+        this.price = price;
+        this.authors = authors;
+    }
+
+    public Book() {
+    }
 }

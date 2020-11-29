@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Title</title>
+    <style>
+        td, th {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<br>
+<ol>
+    <table>
+        <thead>
+        <tr>
+            <th>Name book</th>
+            <th>Year</th>
+            <th>Quantity page</th>
+            <th>Price</th>
+            <th>FirstName author</th>
+            <th>LastName author</th>
+        </tr>
+        </thead>
+        <tbody th:each="item : ${books}">
+        <tr>
+            <td>
+                <li th:text="${item.nameBook}"></li>
+            </td>
+            <td th:text="${item.year}"></td>
+            <td th:text="${item.quantityPage}"></td>
+            <td th:text="${item.price}"></td>
+            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
+            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
+        </tr>
+        </tbody>
+    </table>
+</ol>
+
+</body>
+</html>

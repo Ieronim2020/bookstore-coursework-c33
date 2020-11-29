@@ -1,6 +1,7 @@
 package by.tms.bookstorecourseworkc33.controller;
 
 import by.tms.bookstorecourseworkc33.entity.user.User;
+import by.tms.bookstorecourseworkc33.service.AuthorServiceImpl;
 import by.tms.bookstorecourseworkc33.service.BookServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -12,18 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(path = "/")
 public class IndexController {
     private final BookServiceImpl bookServiceImpl;
-//    private final AuthorServiceImpl authorServiceImpl;
+    private final AuthorServiceImpl authorServiceImpl;
 
-    public IndexController(BookServiceImpl bookServiceImpl) {
+    public IndexController(BookServiceImpl bookServiceImpl, AuthorServiceImpl authorServiceImpl) {
         this.bookServiceImpl = bookServiceImpl;
-
+        this.authorServiceImpl = authorServiceImpl;
     }
 
-    @GetMapping
+    @GetMapping(path = "/list_book")
     public ModelAndView index(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
-        modelAndView.addObject("user" , user);
+        modelAndView.addObject("user", user);
         modelAndView.addObject("books", bookServiceImpl.getBooks());
-//        modelAndView.addObject("authors", authorServiceImpl.getAuthor());
+        modelAndView.addObject("authors", authorServiceImpl.getAuthor());
         modelAndView.setViewName("index");
         return modelAndView;
     }
