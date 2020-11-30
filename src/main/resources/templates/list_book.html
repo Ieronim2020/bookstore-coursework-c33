@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
     <title>Title</title>
     <style>
         td, th {
@@ -10,6 +10,9 @@
     </style>
 </head>
 <body>
+<br>
+<br>
+<li><a th:href="@{/}">Home</a></li>
 <br>
 <ol>
     <table>
@@ -37,6 +40,5 @@
         </tbody>
     </table>
 </ol>
-
 </body>
 </html>

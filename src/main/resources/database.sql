@@ -1,7 +1,10 @@
 -- Insert data
 
-INSERT INTO users VALUES (1, 'tms@email.com', 'TMS', 'Admin', '$2y$12$9qr5Fa.nazJQa5pMrFjPlOnKKaVfuMmldSB1JrAWJkyFja1EIH9nW', 'ADMIN', 'ACTIVE');
-INSERT INTO users VALUES (2, 'user@email.com', 'Sebastian', 'Bach', '$2y$12$SEFT3FjxBjrVj5esIhpBjukvnxVAAud6C/awWNAkPrOHsTr10t0Qy', 'USER', 'ACTIVE');
+INSERT INTO users VALUES (1, 'tms@email.com', '$2y$12$9qr5Fa.nazJQa5pMrFjPlOnKKaVfuMmldSB1JrAWJkyFja1EIH9nW', 'TMS');
+INSERT INTO users VALUES (2, 'user@email.com', '$2y$12$LEUF4uh0MOgh16tSsKcQJuT7nNROKnkuuMGZpbLIquPlaMEqWfKyS', 'Sebastian Bach');
+
+INSERT INTO user_roles VALUES (1, 'ADMIN');
+INSERT INTO user_roles VALUES (2, 'USER');
 
 INSERT INTO books VALUES (1, 'Java. Полное руководство', 199.70, 1488, 2018);
 INSERT INTO authors VALUES (1, 'Шилдт', 'Герберт', 1);

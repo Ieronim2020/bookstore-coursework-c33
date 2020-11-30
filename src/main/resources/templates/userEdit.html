@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>Update user</h4>
+<form th:action="@{/user/{id}(id=${findUser.getId()})}" th:object="${userUpdate}" method="post">
+    <p>Username</p>
+    <input th:field="*{usernameDto}" type="text" name="username" th:value="${findUser.getUsername()}">
+    <p>Password</p>
+    <input type="password" th:field="*{passwordDto}">
+    <p>Email</p>
+    <input th:field="*{emailDto}" type="text" name="email" th:value="${findUser.getEmail()}">
+    <select th:field="*{rolesDto}">
+        <option value="" disabled selected>Choose operation</option>
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+    </select>
+    <br>
+    <button type="submit">Update user</button>
+</form>
+</body>
+</html>
+

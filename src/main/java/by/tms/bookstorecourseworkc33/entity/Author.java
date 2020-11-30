@@ -17,7 +17,6 @@ public class Author {
     @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
     @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "authors_id", referencedColumnName = "id")
     private Book book;
 
     public Author() {

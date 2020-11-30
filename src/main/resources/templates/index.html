@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-
 </head>
 <body>
-<a th:href="@{/reg}">Registration</a>
-
-
+<li><a th:href="@{/registration}">Registration</a></li>
+<li><a th:href="@{/list_book}">List book</a></li>
+<br>
+<h3>A shop selling used books</h3>
+<h4>Only a registered user can view the list of books.</h4>
+<br>
+<div>
+    <form th:if="${users!=null}" th:action="@{/auth/logout}" method="post">
+        <button type="submit">Sign out</button>
+    </form>
+</div>
 </body>
 </html>
