@@ -4,18 +4,19 @@ import by.tms.bookstorecourseworkc33.entity.user.Role;
 import by.tms.bookstorecourseworkc33.entity.user.User;
 import by.tms.bookstorecourseworkc33.entity.user.dto.UserDto;
 import by.tms.bookstorecourseworkc33.repository.UserRepository;
-
-import by.tms.bookstorecourseworkc33.service.exception.SuchUserIsAlreadyRegisteredException;
+import by.tms.bookstorecourseworkc33.service.exception.UserIsAlreadyRegisteredException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
@@ -25,31 +26,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
+    public List<User> loadUserById(long id) {
+        return userRepository.findAllById(id);
     }
 
     @Override
     public List<User> findAll(User user) {
-        List<User> findAllUsers = userRepository.findAll();
-        return findAllUsers;
+        return userRepository.findAll();
     }
 
     @Override
-    public void saveRegUser(UserDto userDto) {
-        User userFromDb = userRepository.findByEmail(userDto.getEmailDto());
+    public void saveRegUser(User user) {
+        User userFromDb = userRepository.findByEmail(user.getEmail());
         if (userFromDb == null) {
-            User userReg = new User();
-            userReg.setEmail(userDto.getEmailDto());
-            userReg.setPassword(passwordEncoder.encode(userDto.getPasswordDto()));
-            userReg.setUsername(userDto.getUsernameDto());
-            userReg.setRoles(Collections.singleton(Role.USER));
-            userRepository.save(userReg);
-        } else throw new SuchUserIsAlreadyRegisteredException();
+            userRepository.save(user);
+        } else throw new UserIsAlreadyRegisteredException();
     }
 
     @Override
@@ -69,5 +60,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             users.setRoles(Set.of(Role.values()));
             userRepository.save(users);
         }
+    }
+
+    @Override
+    public void deleteUserById(long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 }

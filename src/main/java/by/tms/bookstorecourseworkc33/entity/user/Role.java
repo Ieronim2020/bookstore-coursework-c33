@@ -2,7 +2,6 @@ package by.tms.bookstorecourseworkc33.entity.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
-
 public enum Role implements GrantedAuthority {
     USER, ADMIN;
 

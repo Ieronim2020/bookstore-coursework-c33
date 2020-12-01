@@ -10,11 +10,11 @@
 <br>
 <form th:action="@{/registration}" th:object="${userReg}" method="post">
     <p><input type="text" th:field="*{emailDto}" placeholder="Email"/></p>
-    <p th:if="${#fields.hasErrors('email')}" th:errors="*{emailDto}">You need to enter more characters</p>
+    <p th:if="${#fields.hasErrors('emailDto')}" th:errors="*{emailDto}">You need to enter more characters</p>
     <p><input type="password" th:field="*{passwordDto}" placeholder="Password"/></p>
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{passwordDto}">You need to enter more characters</p>
+    <p th:if="${#fields.hasErrors('passwordDto')}" th:errors="*{passwordDto}">You need to enter more characters</p>
     <p><input type="text" th:field="*{usernameDto}" placeholder="Username"/></p>
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{usernameDto}">You need to enter more characters</p>
+    <p th:if="${#fields.hasErrors('usernameDto')}" th:errors="*{usernameDto}">You need to enter more characters</p>
     <button type="submit">Registration</button>
 </form>
 </body>

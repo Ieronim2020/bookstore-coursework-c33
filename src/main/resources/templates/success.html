@@ -5,13 +5,13 @@
     <title>Success</title>
 </head>
 <body>
+<li><a th:href="@{/}">Home</a></li>
+<li><a th:href="@{/list_book}">List book</a></li>
+<br>
 <h1>Congratulations. Registration completed successfully.</h1>
 <br>
 <form th:action="@{/auth/logout}" method="post">
     <button type="submit">Sign out</button>
 </form>
-<br>
-<li><a th:href="@{/list_book}">List book</a></li>
-<li><a th:href="@{/}">Home</a></li>
 </body>
 </html>

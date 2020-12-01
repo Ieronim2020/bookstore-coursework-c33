@@ -3,12 +3,14 @@ package by.tms.bookstorecourseworkc33.entity.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
 
@@ -21,15 +23,23 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email cannot be empty")
+    @NotEmpty(message = "Email cannot be empty")
     @Column(name = "email", length = 255, nullable = false, unique = true)
     private String email;
+
     @NotBlank(message = "Password cannot be empty")
+    @NotEmpty(message = "Password cannot be empty")
+    @Length(min = 3, max = 255, message = "Length 3 - 255")
     @Column(name = "password", length = 255, nullable = false)
     private String password;
+
     @NotBlank(message = "Username cannot be empty")
-    @Column(name = "name", length = 1000, nullable = false)
+    @NotEmpty(message = "Username cannot be empty")
+    @Length(min = 3, max = 50, message = "Length 3 - 50")
+    @Column(name = "name", length = 50, nullable = false)
     private String username;
 
     @Enumerated(EnumType.STRING)

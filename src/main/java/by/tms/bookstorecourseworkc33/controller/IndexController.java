@@ -30,7 +30,6 @@ public class IndexController {
         return modelAndView;
     }
 
-
     @GetMapping(path = "/list_book")
     public ModelAndView listBook(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
         modelAndView.addObject("users", user);

@@ -6,17 +6,25 @@
 </head>
 <body>
 <li><a th:href="@{/}">Home</a></li>
-<h4>Update user</h4>
-<form th:action="@{/user/{id}(id=${findUser.getId()})}" th:object="${userUpdate}" method="post">
+<h4>Update and delete user</h4>
+<form th:action="@{/admin/{id}(id=${findUser.getId()})}" th:object="${userUpdate}" method="post">
     <p>Username</p>
     <input th:field="*{usernameDto}" type="text" name="username" th:value="${findUser.getUsername()}">
     <p>Password</p>
     <input type="password" th:field="*{passwordDto}">
     <p>Email</p>
     <input th:field="*{emailDto}" type="text" name="email" th:value="${findUser.getEmail()}">
+    <p>Role</p>
+    <select th:field="*{rolesDto}">
+        <option value="" disabled selected>Choose operation</option>
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+    </select>
+    <br>
     <br>
     <br>
     <button type="submit">Update user</button>
 </form>
 </body>
 </html>
+

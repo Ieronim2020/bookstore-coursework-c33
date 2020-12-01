@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
 </head>
 <body>
 <li><a th:href="@{/registration}">Registration</a></li>
-<li><a th:href="@{/list_book}">List book</a></li>
+<li><a th:href="@{/auth/login}">Authentication</a></li>
+<li><a sec:authorize="isAuthenticated()" th:href="@{/list_book}">List book</a></li>
+<div sec:authorize="hasAuthority('USER')">
+    <li><a th:href="@{/user}">User list</a></li>
+</div>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <li><a th:href="@{/admin}">User list</a></li>
+</div>
 <br>
-<h3>A shop selling used books</h3>
-<h4>Only a registered user can view the list of books.</h4>
+<div sec:authorize="isAuthenticated()">
+    Welcome, <span sec:authentication="name">Username</span>
+</div>
+<br>
+<br>
+<br>
+<br>
+<h3>
+    Hello friend.
+    <br>
+    A shop selling used books.
+    <br>
+    Only a registered user can view the list of books.
+</h3>
 <br>
 <div>
-    <form th:if="${users!=null}" th:action="@{/auth/logout}" method="post">
+    <form sec:authorize="isAuthenticated()" th:action="@{/auth/logout}" method="post">
         <button type="submit">Sign out</button>
     </form>
 </div>
