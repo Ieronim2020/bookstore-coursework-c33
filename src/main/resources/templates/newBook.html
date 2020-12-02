@@ -24,6 +24,8 @@
             <th>Price</th>
             <th>FirstName author</th>
             <th>LastName author</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody th:each="item : ${books}">
@@ -36,6 +38,8 @@
             <td th:text="${item.price}"></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
+            <td><a th:href="@{/book/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/book/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

@@ -1,7 +1,7 @@
 package by.tms.bookstorecourseworkc33.service;
 
 import by.tms.bookstorecourseworkc33.entity.user.User;
-import by.tms.bookstorecourseworkc33.entity.user.dto.UserDto;
+import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

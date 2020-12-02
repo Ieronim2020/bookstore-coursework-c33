@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book edit</title>
+</head>
+<body>
+<li><a th:href="@{/}">Home</a></li>
+<h4>Update book</h4>
+
+    <form th:action="@{/book/{id}(id=${findBook.getId()})}" th:object="${bookUpdate}" method="post">
+        <p>Name book</p>
+        <input th:field="*{nameBook}" type="text" name="nameBook" th:value="${findBook.getNameBook()}">
+        <p>Price book</p>
+        <input th:field="*{price}" type="text" name="price" th:value="${findBook.getPrice()}">
+        <p>Quantity Page</p>
+        <input th:field="*{quantityPage}" type="text" name="quantityPage" th:value="${findBook.getQuantityPage()}">
+        <p>Year boor</p>
+        <input th:field="*{year}" type="text" name="year" th:value="${findBook.getYear()}">
+        <br>
+        <br>
+        <button type="submit">Update book</button>
+    </form>
+    </form>
+<!--    <form th:action="@{/book/{id}(id=${findBook.getId()})}" th:object="${authorUpdate}" method="post">-->
+<!--        <p>First name author</p>-->
+<!--        <input th:field="*{firstName}" type="text" name="firstName" th:value="${findAuthor.getFirstName()}">-->
+<!--        <p>Last name author</p>-->
+<!--        <input th:field="*{lastName}" type="text" name="lastName" th:value="${findAuthor.getLastName()}">-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <button type="submit">Update book</button>-->
+<!--    </form>-->
+
+
+
+</body>
+</html>

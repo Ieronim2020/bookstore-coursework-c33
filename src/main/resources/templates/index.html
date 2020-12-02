@@ -14,6 +14,7 @@
 </div>
 <div sec:authorize="hasAuthority('ADMIN')">
     <li><a th:href="@{/admin}">User list</a></li>
+    <li><a th:href="@{/book}">User list</a></li>
 </div>
 <br>
 <div sec:authorize="isAuthenticated()">

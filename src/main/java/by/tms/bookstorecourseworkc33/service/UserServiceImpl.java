@@ -2,10 +2,9 @@ package by.tms.bookstorecourseworkc33.service;
 
 import by.tms.bookstorecourseworkc33.entity.user.Role;
 import by.tms.bookstorecourseworkc33.entity.user.User;
-import by.tms.bookstorecourseworkc33.entity.user.dto.UserDto;
+import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
 import by.tms.bookstorecourseworkc33.repository.UserRepository;
 import by.tms.bookstorecourseworkc33.service.exception.UserIsAlreadyRegisteredException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,12 +17,13 @@ import java.util.Set;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> loadUserById(long id) {
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             users.setUsername(userDto.getUsernameDto());
             users.setRoles(Set.of(Role.values()));
             userRepository.save(users);
-        }
+        } else throw new UserIsAlreadyRegisteredException();
     }
 
     @Override

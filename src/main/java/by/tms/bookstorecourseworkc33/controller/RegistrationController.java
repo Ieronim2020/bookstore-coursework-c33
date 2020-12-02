@@ -2,9 +2,8 @@ package by.tms.bookstorecourseworkc33.controller;
 
 import by.tms.bookstorecourseworkc33.entity.user.Role;
 import by.tms.bookstorecourseworkc33.entity.user.User;
-import by.tms.bookstorecourseworkc33.entity.user.dto.UserDto;
+import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
 import by.tms.bookstorecourseworkc33.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +17,13 @@ import java.util.Collections;
 @Controller
 @RequestMapping(path = "/")
 public class RegistrationController {
+    private final UserServiceImpl userService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public RegistrationController(UserServiceImpl userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/registration")
     public ModelAndView registration(ModelAndView modelAndView) {

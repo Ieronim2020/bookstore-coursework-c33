@@ -1,7 +1,7 @@
 package by.tms.bookstorecourseworkc33.controller;
 
 import by.tms.bookstorecourseworkc33.entity.user.User;
-import by.tms.bookstorecourseworkc33.entity.user.dto.UserDto;
+import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
 import by.tms.bookstorecourseworkc33.service.UserServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
