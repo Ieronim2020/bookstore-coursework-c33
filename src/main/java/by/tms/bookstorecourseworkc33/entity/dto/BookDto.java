@@ -17,6 +17,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//@DynamicUpdate
+//@DynamicInsert
+//@SelectBeforeUpdate
 public class BookDto {
     @NotBlank(message = "NameBookDto cannot be empty")
     @NotEmpty(message = "NameBookDto cannot be empty")
@@ -26,12 +29,11 @@ public class BookDto {
     @Length(min = 3, max = 4, message = "Length 3 - 4")
     private int yearDto;
 
-    @Length(min = 4, max = 2000, message = "Length 4 - 2000")
+    @Length(min = 4, max = 4, message = "Length 4 - 2000")
     private int quantityPageDto;
 
     @Size(min = 1, message = "min 1")
     private BigDecimal priceDto;
 
     private List<Author> authors;
-
 }

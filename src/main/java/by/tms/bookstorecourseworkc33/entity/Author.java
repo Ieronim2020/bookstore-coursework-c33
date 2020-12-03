@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,16 +15,12 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Table(name = "authors")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
+//@DynamicUpdate
+//@DynamicInsert
+//@SelectBeforeUpdate
 public class Author {
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTHORS_SEQ")
-//    @SequenceGenerator(name = "AUTHORS_SEQ", sequenceName = "SEQUENCES_AUTHORS", allocationSize = 1, initialValue = 1)
-//    @GenericGenerator(name = "cmrSeq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private long id;
 

@@ -3,9 +3,6 @@ package by.tms.bookstorecourseworkc33.entity.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,17 +19,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
+//@DynamicUpdate
+//@DynamicInsert
+//@SelectBeforeUpdate
 public class User implements UserDetails {
-
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ")
-//    @SequenceGenerator(name = "USERS_SEQ", sequenceName = "SEQUENCE_USERS", allocationSize = 1, initialValue = 1)
-//    @GenericGenerator(name = "cmrSeq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private long id;
 

@@ -7,7 +7,7 @@
 <body>
 <li><a th:href="@{/}">Home</a></li>
 <h4>Add new book</h4>
-<form th:action="@{/book/newbook}" th:object="${books}" method="post">
+<form th:action="@{/book/newBook}" th:object="${books}" method="post">
     <p>Name book</p>
     <input type="text" th:field="*{nameBookDto}">
     <p th:if="${#fields.hasErrors('nameBookDto')}" th:errors="*{nameBookDto}">You need to enter more characters</p>
@@ -22,7 +22,7 @@
     <input type="text" th:field="*{yearDto}">
     <p th:if="${#fields.hasErrors('yearDto')}" th:errors="*{yearDto}">You need to enter more characters</p>
 
-    <div th:action="@{/book/newbook}" th:object="${authors}" method="post">
+    <div th:action="@{/book/newBook}" th:object="${authors}" method="post">
         <p>First name author</p>
         <input type="text" th:field="*{firstNameDto}">
         <p th:if="${#fields.hasErrors('firstNameDto')}" th:errors="*{firstNameDto}">You need to enter more

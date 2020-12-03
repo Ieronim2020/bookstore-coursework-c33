@@ -7,6 +7,7 @@ import by.tms.bookstorecourseworkc33.service.exception.NoBookWithIdException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -50,6 +51,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void saveBook(Book book) {
-        bookRepository.save(book);
+        bookRepository.saveAndFlush(book);
     }
 }

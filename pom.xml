@@ -17,7 +17,7 @@
     <properties>
         <java.version>11</java.version>
 
-        <property name="hibernate.id.new_generator_mappings" value="true"/>
+<!--        <property name="hibernate.id.new_generator_mappings" value="true"/>-->
 
     </properties>
 

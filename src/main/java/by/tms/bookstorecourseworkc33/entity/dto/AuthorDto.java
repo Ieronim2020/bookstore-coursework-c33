@@ -14,8 +14,10 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//@DynamicUpdate
+//@DynamicInsert
+//@SelectBeforeUpdate
 public class AuthorDto {
-
     @NotBlank(message = "FirstnameDto cannot be empty")
     @NotEmpty(message = "FirstnameDto cannot be empty")
     @Length(min = 3, max = 50, message = "Length 3 - 50")

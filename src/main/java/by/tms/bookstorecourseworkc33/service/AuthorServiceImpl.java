@@ -35,4 +35,9 @@ public class AuthorServiceImpl implements AuthorService {
     public void deleteAuthorById(long id) {
         authorRepository.deleteById(id);
     }
+
+    @Override
+    public void newAuthor(Author author) {
+        authorRepository.saveAndFlush(author);
+    }
 }

@@ -18,10 +18,10 @@
     <input type="text" name="yearDto" th:value="${findBook.getYear()}">
 
     <div th:action="@{/book/{id}(id=${findBook.getId()})}" th:object="${authorUpdate}" method="post">
-    <p>First name author</p>
-    <input type="text" name="firstNameDto" th:value="${findAuthor.getFirstName()}">
-    <p>Last name author</p>
-    <input type="text" name="lastNameDto" th:value="${findAuthor.getLastName()}">
+        <p>First name author</p>
+        <input type="text" name="firstNameDto" th:value="${findAuthor.getFirstName()}">
+        <p>Last name author</p>
+        <input type="text" name="lastNameDto" th:value="${findAuthor.getLastName()}">
     </div>
     <br>
     <br>

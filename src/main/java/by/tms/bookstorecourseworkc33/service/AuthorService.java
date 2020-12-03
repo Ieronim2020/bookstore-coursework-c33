@@ -12,4 +12,6 @@ public interface AuthorService {
     void saveAuthor(Author author);
 
     void deleteAuthorById(long id);
+
+    void newAuthor(Author author);
 }

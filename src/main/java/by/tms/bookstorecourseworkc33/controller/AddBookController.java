@@ -75,6 +75,7 @@ public class AddBookController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/newBook")
     public ModelAndView registration(ModelAndView modelAndView) {
         modelAndView.addObject("books", new BookDto());
@@ -83,21 +84,21 @@ public class AddBookController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/newBook")
-    public ModelAndView addUser(@ModelAttribute("books") BookDto bookDto, @ModelAttribute("authors") AuthorDto authorDto, long id, ModelAndView modelAndView) {
+    public ModelAndView addUser(@ModelAttribute("books") BookDto bookDto, @ModelAttribute("authors") AuthorDto authorDto, ModelAndView modelAndView) {
         Book book = new Book();
-        book.setId(id);
         book.setNameBook(bookDto.getNameBookDto());
         book.setPrice(bookDto.getPriceDto());
         book.setQuantityPage(bookDto.getQuantityPageDto());
         book.setYear(bookDto.getYearDto());
+        book.setAuthors(bookDto.getAuthors());
+        bookService.saveBook(book);
         Author author = new Author();
         author.setFirstName(authorDto.getFirstNameDto());
         author.setLastName(authorDto.getLastNameDto());
-//        author.setBook();
-        authorService.saveAuthor(author);
-        book.setAuthors(bookDto.getAuthors());
-        bookService.saveBook(book);
+        author.setBook(book);
+        authorService.newAuthor(author);
         modelAndView.setViewName("redirect:/book");
         return modelAndView;
     }
