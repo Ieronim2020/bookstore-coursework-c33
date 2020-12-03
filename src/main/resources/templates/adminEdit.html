@@ -6,7 +6,7 @@
 </head>
 <body>
 <li><a th:href="@{/}">Home</a></li>
-<h4>Update and delete user</h4>
+<h4>Update user</h4>
 <form th:action="@{/admin/{id}(id=${findUser.getId()})}" th:object="${userUpdate}" method="post">
     <p>Username</p>
     <input th:field="*{usernameDto}" type="text" name="username" th:value="${findUser.getUsername()}">

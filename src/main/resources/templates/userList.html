@@ -11,6 +11,7 @@
 </head>
 <body>
 <li><a th:href="@{/}">Home</a></li>
+<h4>User account</h4>
 <ol>
     <table>
         <thead>
@@ -21,11 +22,8 @@
             <th></th>
         </tr>
         </thead>
-        <tbody th:each="item:${userAuth}">
-        <tr>
-            <td>
-                <li th:text="${item.getUsername()}"></li>
-            </td>
+        <tr th:each="item : ${userAuth}">
+            <td th:text="${item.getUsername()}"></td>
             <td th:text="${item.email}"></td>
             <td th:text="${item.password}"></td>
             <td><a th:href="@{/user/{id}(id=${item.getId()})}">Edit</a></td>

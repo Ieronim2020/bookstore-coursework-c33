@@ -27,7 +27,7 @@ public class AddBookController {
     public ModelAndView listBook(ModelAndView modelAndView) {
         modelAndView.addObject("books", bookService.getBooks());
         modelAndView.addObject("authors", authorService.getAuthor());
-        modelAndView.setViewName("newBook");
+        modelAndView.setViewName("bookList");
         return modelAndView;
     }
 
@@ -36,7 +36,7 @@ public class AddBookController {
     public ModelAndView getAllUsers(@PathVariable("id") long id, ModelAndView modelAndView) {
         Book findBook = bookService.findBookById(id);
         modelAndView.addObject("findBook", findBook);
-        Author findAuthor = authorService.findAuthorById(id);
+        Author findAuthor = authorService.findAuthorById(findBook.getId());
         modelAndView.addObject("findAuthor", findAuthor);
         modelAndView.addObject("bookUpdate", new BookDto());
         modelAndView.addObject("authorUpdate", new AuthorDto());
@@ -46,25 +46,58 @@ public class AddBookController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/{id}")
-    public ModelAndView updateBook(@ModelAttribute("bookUpdate") BookDto bookDto, @ModelAttribute("bookUpdate") AuthorDto authorDto, @PathVariable("id") long id, ModelAndView modelAndView) {
-        Book book = new Book();
-        book.setNameBook(bookDto.getNameBook());
-        book.setPrice(bookDto.getPrice());
-        book.setQuantityPage(bookDto.getQuantityPage());
-        book.setYear(bookDto.getYear());
-        bookService.updateBook(id, book);
-//        Author author = new Author();
-//        author.setFirstName(authorDto.getFirstName());
-//        author.setLastName(authorDto.getLastName());
-//        authorService.updateAuthor(author);
+    public ModelAndView updateBook(@ModelAttribute("bookUpdate") BookDto bookDto, @ModelAttribute("authorUpdate") AuthorDto authorDto, @PathVariable("id") long id, ModelAndView modelAndView) {
+        Author author = new Author();
+        author.setId(id);
+        author.setFirstName(authorDto.getFirstNameDto());
+        author.setLastName(authorDto.getLastNameDto());
+        author.setBook(bookService.findBookById(id));
+        authorService.saveAuthor(author);
+        bookService.updateBook(id, bookDto);
+        Book findBook = bookService.findBookById(id);
+        modelAndView.addObject("findBook", findBook);
+        Author findAuthor = authorService.findAuthorById(findBook.getId());
+        modelAndView.addObject("findAuthor", findAuthor);
+        modelAndView.addObject("bookUpdate", new BookDto());
+        modelAndView.addObject("authorUpdate", new AuthorDto());
         modelAndView.setViewName("redirect:/book");
         return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/book/{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView deleteBook(@PathVariable("id") long id, ModelAndView modelAndView) {
+        Book findBook = bookService.findBookById(id);
+        modelAndView.addObject("findBook", findBook);
+        authorService.deleteAuthorById(findBook.getId());
         bookService.deleteBookById(id);
+        modelAndView.setViewName("redirect:/book");
+        return modelAndView;
+    }
+
+    @GetMapping("/newBook")
+    public ModelAndView registration(ModelAndView modelAndView) {
+        modelAndView.addObject("books", new BookDto());
+        modelAndView.addObject("authors", new AuthorDto());
+        modelAndView.setViewName("newBook");
+        return modelAndView;
+    }
+
+    @PostMapping("/newBook")
+    public ModelAndView addUser(@ModelAttribute("books") BookDto bookDto, @ModelAttribute("authors") AuthorDto authorDto, long id, ModelAndView modelAndView) {
+        Book book = new Book();
+        book.setId(id);
+        book.setNameBook(bookDto.getNameBookDto());
+        book.setPrice(bookDto.getPriceDto());
+        book.setQuantityPage(bookDto.getQuantityPageDto());
+        book.setYear(bookDto.getYearDto());
+        Author author = new Author();
+        author.setFirstName(authorDto.getFirstNameDto());
+        author.setLastName(authorDto.getLastNameDto());
+//        author.setBook();
+        authorService.saveAuthor(author);
+        book.setAuthors(bookDto.getAuthors());
+        bookService.saveBook(book);
         modelAndView.setViewName("redirect:/book");
         return modelAndView;
     }

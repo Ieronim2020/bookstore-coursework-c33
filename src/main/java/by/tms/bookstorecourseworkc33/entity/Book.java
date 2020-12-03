@@ -1,12 +1,14 @@
 package by.tms.bookstorecourseworkc33.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-import org.hibernate.annotations.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
@@ -36,22 +38,15 @@ public class Book {
     @Column(name = "nameBook", length = 255, nullable = false)
     private String nameBook;
 
-    @NotBlank(message = "Year cannot be empty")
-    @NotEmpty(message = "Year cannot be empty")
     @Column(name = "year", length = 4, nullable = false)
     private int year;
 
-    @NotBlank(message = "QuantityPage cannot be empty")
-    @NotEmpty(message = "QuantityPage cannot be empty")
     @Column(name = "quantityPage", length = 4, nullable = false)
     private int quantityPage;
 
-    @NotBlank(message = "Price cannot be empty")
-    @NotEmpty(message = "Price cannot be empty")
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn
-    private Author author;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Author> authors;
 }

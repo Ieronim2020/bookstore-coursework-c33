@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/admin")
 public class AdminController {
-
     private final UserServiceImpl userService;
 
     public AdminController(UserServiceImpl userService) {
@@ -45,14 +44,14 @@ public class AdminController {
     public ModelAndView updateUser(@ModelAttribute("userUpdate") UserDto userDto, @PathVariable("id") long id, ModelAndView modelAndView) {
         userService.updateProfile(id, userDto);
         User findUser = userService.findUserById(id);
-        modelAndView.addObject("allUsers", findUser);
+        modelAndView.addObject("findUser", findUser);
         modelAndView.addObject("userUpdate", new UserDto());
         modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/admin/{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView deleteUser(@PathVariable("id") long id, ModelAndView modelAndView) {
         userService.deleteUserById(id);
         modelAndView.setViewName("redirect:/admin");

@@ -11,10 +11,12 @@
 </head>
 <body>
 <li><a th:href="@{/}">Home</a></li>
+<h4>Update and delete user</h4>
 <ol>
     <table>
         <thead>
         <tr>
+            <th>#</th>
             <th>Username</th>
             <th>Email</th>
             <th>Password</th>
@@ -23,11 +25,9 @@
             <th></th>
         </tr>
         </thead>
-        <tbody th:each="item : ${users}">
-        <tr>
-            <td>
-                <li th:text="${item.username}"></li>
-            </td>
+        <tr th:each="item, status : ${users}">
+            <td th:text="${status.index + 1}">1</td>
+            <td th:text="${item.username}"></td>
             <td th:text="${item.email}"></td>
             <td th:text="${item.password}"></td>
             <td th:text="${item.roles}"></td>

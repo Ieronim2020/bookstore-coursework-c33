@@ -13,11 +13,14 @@
 <br>
 <br>
 <li><a th:href="@{/}">Home</a></li>
+<li><a th:href="@{/book/newBook}">Add new book</a></li>
+<h4>Update, delete and add book</h4>
 <br>
 <ol>
     <table>
         <thead>
         <tr>
+            <th>#</th>
             <th>Name book</th>
             <th>Year</th>
             <th>Quantity page</th>
@@ -26,16 +29,16 @@
             <th>LastName author</th>
         </tr>
         </thead>
-        <tbody th:each="item : ${books}">
-        <tr>
-            <td>
-                <li th:text="${item.nameBook}"></li>
-            </td>
+        <tr th:each="item, status : ${books}">
+            <td th:text="${status.index + 1}">1</td>
+            <td th:text="${item.nameBook}"></td>
             <td th:text="${item.year}"></td>
             <td th:text="${item.quantityPage}"></td>
             <td th:text="${item.price}"></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
+            <td><a th:href="@{/book/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/book/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

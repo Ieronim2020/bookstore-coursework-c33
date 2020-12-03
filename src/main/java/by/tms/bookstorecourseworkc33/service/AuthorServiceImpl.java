@@ -22,19 +22,17 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void saveAuthor (Author author){
-        authorRepository.save(author);
-    }
-
-    @Override
     public Author findAuthorById(long id) {
         return authorRepository.findById(id);
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public void saveAuthor(Author author) {
+        authorRepository.save(author);
+    }
 
-            authorRepository.save(author);
-
+    @Override
+    public void deleteAuthorById(long id) {
+        authorRepository.deleteById(id);
     }
 }

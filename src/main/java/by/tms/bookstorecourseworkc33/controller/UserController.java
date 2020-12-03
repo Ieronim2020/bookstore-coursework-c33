@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
-
     private final UserServiceImpl userService;
 
     public UserController(UserServiceImpl userService) {

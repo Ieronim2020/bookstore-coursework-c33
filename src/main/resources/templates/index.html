@@ -8,13 +8,15 @@
 <body>
 <li><a th:href="@{/registration}">Registration</a></li>
 <li><a th:href="@{/auth/login}">Authentication</a></li>
-<li><a sec:authorize="isAuthenticated()" th:href="@{/list_book}">List book</a></li>
+<div sec:authorize="isAuthenticated()">
+    <li><a th:href="@{/userBookList}">List book</a></li>
+</div>
 <div sec:authorize="hasAuthority('USER')">
     <li><a th:href="@{/user}">User list</a></li>
 </div>
 <div sec:authorize="hasAuthority('ADMIN')">
-    <li><a th:href="@{/admin}">User list</a></li>
-    <li><a th:href="@{/book}">User list</a></li>
+    <li><a th:href="@{/admin}">Update and delete user</a></li>
+    <li><a th:href="@{/book}">Update and delete, add book</a></li>
 </div>
 <br>
 <div sec:authorize="isAuthenticated()">

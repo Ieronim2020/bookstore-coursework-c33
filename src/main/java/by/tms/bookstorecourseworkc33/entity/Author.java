@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +19,9 @@ import java.util.List;
 @Entity
 @Table(name = "authors")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
 public class Author {
     @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTHORS_SEQ")
@@ -36,7 +41,6 @@ public class Author {
     @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
 
-    @Basic(fetch = FetchType.LAZY)
-    @OneToMany(mappedBy = "author")
-    private List<Book> books;
+    @ManyToOne
+    private Book book;
 }

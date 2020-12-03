@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,24 +18,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
-    @NotBlank(message = "NameBook cannot be empty")
-    @NotEmpty(message = "NameBook cannot be empty")
+    @NotBlank(message = "NameBookDto cannot be empty")
+    @NotEmpty(message = "NameBookDto cannot be empty")
     @Length(min = 3, max = 255, message = "Length 3 - 255")
     private String nameBookDto;
 
-    @NotBlank(message = "Year cannot be empty")
-    @NotEmpty(message = "Year cannot be empty")
     @Length(min = 3, max = 4, message = "Length 3 - 4")
     private int yearDto;
 
-    @NotBlank(message = "QuantityPage cannot be empty")
-    @NotEmpty(message = "QuantityPage cannot be empty")
     @Length(min = 4, max = 2000, message = "Length 4 - 2000")
     private int quantityPageDto;
 
-    @NotBlank(message = "Price cannot be empty")
-    @NotEmpty(message = "Price cannot be empty")
+    @Size(min = 1, message = "min 1")
     private BigDecimal priceDto;
 
-    private Author authorDto;
+    private List<Author> authors;
+
 }

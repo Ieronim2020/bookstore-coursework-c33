@@ -2,47 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List book</title>
-    <style>
-        td, th {
-            border: 1px solid blue;
-        }
-    </style>
+    <title>Add new book</title>
 </head>
 <body>
-<br>
-<br>
 <li><a th:href="@{/}">Home</a></li>
-<br>
-<ol>
-    <table>
-        <thead>
-        <tr>
-            <th>Name book</th>
-            <th>Year</th>
-            <th>Quantity page</th>
-            <th>Price</th>
-            <th>FirstName author</th>
-            <th>LastName author</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody th:each="item : ${books}">
-        <tr>
-            <td>
-                <li th:text="${item.nameBook}"></li>
-            </td>
-            <td th:text="${item.year}"></td>
-            <td th:text="${item.quantityPage}"></td>
-            <td th:text="${item.price}"></td>
-            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
-            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
-            <td><a th:href="@{/book/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/book/delete/{id}(id=${item.getId()})}">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
-</ol>
+<h4>Add new book</h4>
+<form th:action="@{/book/newbook}" th:object="${books}" method="post">
+    <p>Name book</p>
+    <input type="text" th:field="*{nameBookDto}">
+    <p th:if="${#fields.hasErrors('nameBookDto')}" th:errors="*{nameBookDto}">You need to enter more characters</p>
+    <p>Price book</p>
+    <input type="text" th:field="*{priceDto}">
+    <p th:if="${#fields.hasErrors('priceDto')}" th:errors="*{priceDto}">You need to enter more characters</p>
+    <p>Quantity Page</p>
+    <input type="text" th:field="*{quantityPageDto}">
+    <p th:if="${#fields.hasErrors('quantityPageDto')}" th:errors="*{quantityPageDto}">You need to enter more
+        characters</p>
+    <p>Year book</p>
+    <input type="text" th:field="*{yearDto}">
+    <p th:if="${#fields.hasErrors('yearDto')}" th:errors="*{yearDto}">You need to enter more characters</p>
+
+    <div th:action="@{/book/newbook}" th:object="${authors}" method="post">
+        <p>First name author</p>
+        <input type="text" th:field="*{firstNameDto}">
+        <p th:if="${#fields.hasErrors('firstNameDto')}" th:errors="*{firstNameDto}">You need to enter more
+            characters</p>
+        <p>Last name author</p>
+        <input type="text" th:field="*{lastNameDto}">
+        <p th:if="${#fields.hasErrors('lastNameDto')}" th:errors="*{lastNameDto}">You need to enter more characters</p>
+    </div>
+    <br>
+    <br>
+    <button type="submit">Add new book</button>
+</form>
 </body>
 </html>

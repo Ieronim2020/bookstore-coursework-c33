@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List book</title>
+    <style>
+        td, th {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<br>
+<br>
+<li><a th:href="@{/}">Home</a></li>
+<h4>List book</h4>
+<br>
+<ol>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name book</th>
+            <th>Year</th>
+            <th>Quantity page</th>
+            <th>Price</th>
+            <th>FirstName author</th>
+            <th>LastName author</th>
+        </tr>
+        </thead>
+        <tr th:each="item, status : ${books}">
+            <td th:text="${status.index + 1}">1</td>
+            <td th:text="${item.nameBook}"></td>
+            <td th:text="${item.year}"></td>
+            <td th:text="${item.quantityPage}"></td>
+            <td th:text="${item.price}"></td>
+            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
+            <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
+        </tr>
+        </tbody>
+    </table>
+</ol>
+</body>
+</html>

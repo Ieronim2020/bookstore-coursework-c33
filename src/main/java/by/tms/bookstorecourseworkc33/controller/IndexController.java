@@ -30,12 +30,12 @@ public class IndexController {
         return modelAndView;
     }
 
-    @GetMapping(path = "/list_book")
+    @GetMapping(path = "/userBookList")
     public ModelAndView listBook(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
         modelAndView.addObject("users", user);
         modelAndView.addObject("books", bookService.getBooks());
         modelAndView.addObject("authors", authorService.getAuthor());
-        modelAndView.setViewName("list_book");
+        modelAndView.setViewName("userBookList");
         return modelAndView;
     }
 }
