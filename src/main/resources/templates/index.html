@@ -6,10 +6,13 @@
     <title>Home Page</title>
 </head>
 <body>
+<div sec:authorize="isAnonymous()">
 <li><a th:href="@{/registration}">Registration</a></li>
 <li><a th:href="@{/auth/login}">Authentication</a></li>
+</div>
 <div sec:authorize="isAuthenticated()">
     <li><a th:href="@{/userBookList}">List book</a></li>
+    <li><a th:href="@{/order}">Cart</a></li>
 </div>
 <div sec:authorize="hasAuthority('USER')">
     <li><a th:href="@{/user}">User list</a></li>

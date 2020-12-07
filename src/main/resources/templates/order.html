@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <style>
+        td, th {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<ol>
+    <table cellpadding="2" cellspacing="2" border="1" th:with="totalPrice=0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name book</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tr th:each="item, status : ${session.cart}">
+            <td th:text="${status.index + 1}">1</td>
+            <td><span th:each="producttbl: ${item.getBook()}"> <span th:text="${producttbl.nameBook}"/></span></td>
+            <td><span th:each="producttbl: ${item.getBook()}"> <span th:text="${producttbl.price}"/></span></td>
+            <td th:text="${item.count}"></td>
+            <td><span th:each="producttbl: ${item.getBook()}"> <span th:text="${producttbl.price * item.count}"/></span>
+            </td>
+<!--            <td align="center"><a -->
+<!--                    th:href="${#httpServletRequest.getContextPath()}/order/remove/${item.getBook(). }"-->
+<!--                    onclick="return confirm('Are you sure?')">Remove</a></td>-->
+        </tr>
+        <tr th:each="item : ${session.cart}">
+            <td colspan="6" align="right">Sum</td>
+            <span th:each="producttbl: ${item.getBook()}"> <span
+                    th:with="totalPrice=${totalPrice + producttbl.price * item.count}"/></span>
+        </tr>
+    </table>
+    </tbody>
+    </table>
+</ol>
+</body>
+</html>

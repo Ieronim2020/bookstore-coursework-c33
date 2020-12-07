@@ -1,7 +1,5 @@
 -- Insert data
 
--- CREATE SEQUENCE SEQUENCE_USERS START WITH 3 INCREMENT BY 1;
-
 INSERT INTO users VALUES (1, 'tms@email.com', '$2y$12$9qr5Fa.nazJQa5pMrFjPlOnKKaVfuMmldSB1JrAWJkyFja1EIH9nW', 'TMS');
 INSERT INTO users VALUES (2, 'user@email.com', '$2y$12$LEUF4uh0MOgh16tSsKcQJuT7nNROKnkuuMGZpbLIquPlaMEqWfKyS', 'Sebastian Bach');
 

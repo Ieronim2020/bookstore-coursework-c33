@@ -1,5 +1,6 @@
 package by.tms.bookstorecourseworkc33.entity.user;
 
+import by.tms.bookstorecourseworkc33.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -50,6 +51,9 @@ public class User implements UserDetails {
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Set<Role> roles;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Order order;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

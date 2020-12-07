@@ -13,6 +13,7 @@
 <br>
 <br>
 <li><a th:href="@{/}">Home</a></li>
+<li><a th:href="@{/order}">Cart</a></li>
 <h4>List book</h4>
 <br>
 <ol>
@@ -26,6 +27,7 @@
             <th>Price</th>
             <th>FirstName author</th>
             <th>LastName author</th>
+            <th>Buy</th>
         </tr>
         </thead>
         <tr th:each="item, status : ${books}">
@@ -36,6 +38,11 @@
             <td th:text="${item.price}"></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.firstName}"/></span></td>
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
+            <td>
+                <!--                <a th:href="${#httpServletRequest.getContextPath()}/order/buy/item.getId()">Buy Now</a>-->
+                <a> <span th:each="producttbl: ${item.authors}"> <span th:href="@{order/buy/producttbl.getId()}"/></span>>Buy Now</a>
+                <!--                ContextPath()-->
+            </td>
         </tr>
         </tbody>
     </table>

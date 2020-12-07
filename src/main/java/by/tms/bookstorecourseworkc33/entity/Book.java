@@ -1,9 +1,6 @@
 package by.tms.bookstorecourseworkc33.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,8 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -42,4 +38,7 @@ public class Book {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Author> authors;
+
+    @ManyToOne
+    private Order order;
 }

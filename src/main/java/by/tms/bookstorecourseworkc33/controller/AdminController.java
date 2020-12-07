@@ -2,6 +2,7 @@ package by.tms.bookstorecourseworkc33.controller;
 
 import by.tms.bookstorecourseworkc33.entity.user.User;
 import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
+import by.tms.bookstorecourseworkc33.service.UserService;
 import by.tms.bookstorecourseworkc33.service.UserServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,9 +15,9 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/admin")
 public class AdminController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public AdminController(UserServiceImpl userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
     }
 
