@@ -40,9 +40,12 @@
             <td><span th:each="producttbl: ${item.authors}"> <span th:text="${producttbl.lastName}"/></span></td>
             <td>
                 <!--                <a th:href="${#httpServletRequest.getContextPath()}/order/buy/item.getId()">Buy Now</a>-->
-                <a> <span th:each="producttbl: ${item.authors}"> <span th:href="@{order/buy/producttbl.getId()}"/></span>>Buy Now</a>
+                                <a th:href="@{order/buy/{id}(id=${item.getId()})}">Buy Now</a>
+<!--                <a th:href="${[#httpServletRequest.getContextPath()]/cart/buy/{id} (id=${item.getId()})]">Buy Now</a>-->
+<!--                <a> <span th:each="producttbl: ${item.authors}"> <span th:href="@{order/buy/{id}(id=${producttbl.getId()})}"/></span>>Buy Now</a>-->
                 <!--                ContextPath()-->
             </td>
+<!--            th:action="@{/admin/{id}(id=${findUser.getId()})}"-->
         </tr>
         </tbody>
     </table>
