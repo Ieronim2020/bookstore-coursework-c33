@@ -3,6 +3,7 @@ package by.tms.bookstorecourseworkc33.controller;
 import by.tms.bookstorecourseworkc33.entity.Book;
 import by.tms.bookstorecourseworkc33.entity.Order;
 import by.tms.bookstorecourseworkc33.service.BookService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +23,13 @@ public class OrderController {
         this.bookService = bookService;
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping
     public String index() {
         return "/order";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = "buy/{id}")
     public String buy(@PathVariable("id") long id, HttpSession httpSession) {
         if (httpSession.getAttribute("cart") == null) {
@@ -56,6 +59,7 @@ public class OrderController {
         return -1;
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = "remove/{id}")
     public String remove(@PathVariable("id") long id, HttpSession session) {
         List<Order> cart = (List<Order>) session.getAttribute("cart");

@@ -15,4 +15,6 @@ public interface BookService {
     void deleteBookById(long id);
 
     void saveBook(Book book);
+
+    List<Book> findByNameBook(String nameBook);
 }

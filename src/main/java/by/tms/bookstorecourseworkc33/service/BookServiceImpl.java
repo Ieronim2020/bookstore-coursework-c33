@@ -52,4 +52,9 @@ public class BookServiceImpl implements BookService {
     public void saveBook(Book book) {
         bookRepository.saveAndFlush(book);
     }
+
+    @Override
+    public List<Book> findByNameBook(String nameBook) {
+        return bookRepository.findByNameBookContainingIgnoreCase(nameBook);
+    }
 }
