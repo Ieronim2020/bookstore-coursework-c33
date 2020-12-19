@@ -16,5 +16,5 @@ public interface BookService {
 
     void saveBook(Book book);
 
-    List<Book> findByNameBook(String nameBook);
+    List<Book> findByNameBook(String nameBook, String firstName, String lastName);
 }

@@ -14,4 +14,6 @@ public interface AuthorService {
     void deleteAuthorById(long id);
 
     void newAuthor(Author author);
+
+    List<Author> findByFirstNameOrLastName(String firstName, String lastName);
 }

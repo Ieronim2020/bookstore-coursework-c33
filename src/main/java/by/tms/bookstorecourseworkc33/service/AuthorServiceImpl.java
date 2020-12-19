@@ -40,4 +40,9 @@ public class AuthorServiceImpl implements AuthorService {
     public void newAuthor(Author author) {
         authorRepository.saveAndFlush(author);
     }
+
+    @Override
+    public List<Author> findByFirstNameOrLastName(String firstName, String lastName) {
+        return authorRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstName, lastName);
+    }
 }
