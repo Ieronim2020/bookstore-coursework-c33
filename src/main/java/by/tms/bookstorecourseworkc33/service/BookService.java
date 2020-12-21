@@ -2,11 +2,11 @@ package by.tms.bookstorecourseworkc33.service;
 
 import by.tms.bookstorecourseworkc33.entity.Book;
 import by.tms.bookstorecourseworkc33.entity.dto.BookDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BookService {
-    List<Book> getBooks();
+    Page<Book> getBooks(Pageable pageable);
 
     Book findBookById(long id);
 
@@ -16,5 +16,5 @@ public interface BookService {
 
     void saveBook(Book book);
 
-    List<Book> findByNameBook(String nameBook, String firstName, String lastName);
+    Page<Book> findByNameBook(String nameBook, String firstName, String lastName, Pageable pageable);
 }

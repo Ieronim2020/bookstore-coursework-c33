@@ -55,5 +55,19 @@
         </tbody>
     </table>
 </ol>
+<div class="pagination-div">
+    <span th:if="${books.hasPrevious()}">
+        <a th:href="@{/userBookList(page=${books.number-1},size=${books.size})}">Previous</a>
+    </span>
+    <th:block th:each="i: ${#numbers.sequence(0, books.totalPages - 1)}">
+        <span th:if="${books.number == i}" class="selected">[[${i}+1]]</span>
+        <span th:unless="${books.number == i}">
+             <a th:href="@{/userBookList(page=${i},size=${books.size})}">[[${i}+1]]</a>
+        </span>
+    </th:block>
+    <span th:if="${books.hasNext()}">
+        <a th:href="@{/userBookList(page=${books.number+1},size=${books.size})}">Next</a>
+    </span>
+</div>
 </body>
 </html>

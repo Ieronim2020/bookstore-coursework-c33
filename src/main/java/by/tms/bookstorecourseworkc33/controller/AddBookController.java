@@ -6,6 +6,8 @@ import by.tms.bookstorecourseworkc33.entity.dto.AuthorDto;
 import by.tms.bookstorecourseworkc33.entity.dto.BookDto;
 import by.tms.bookstorecourseworkc33.service.AuthorService;
 import by.tms.bookstorecourseworkc33.service.BookService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +26,8 @@ public class AddBookController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public ModelAndView listBook(ModelAndView modelAndView) {
-        modelAndView.addObject("books", bookService.getBooks());
-        modelAndView.addObject("authors", authorService.getAuthor());
+    public ModelAndView listBook(@PageableDefault(size = 5) Pageable pageable,  ModelAndView modelAndView) {
+        modelAndView.addObject("books", bookService.getBooks(pageable));
         modelAndView.setViewName("bookList");
         return modelAndView;
     }

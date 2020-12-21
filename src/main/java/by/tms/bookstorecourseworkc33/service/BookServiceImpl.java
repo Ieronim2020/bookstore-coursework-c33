@@ -4,10 +4,10 @@ import by.tms.bookstorecourseworkc33.entity.Book;
 import by.tms.bookstorecourseworkc33.entity.dto.BookDto;
 import by.tms.bookstorecourseworkc33.repository.BookRepository;
 import by.tms.bookstorecourseworkc33.service.exception.NoBookWithIdException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -19,8 +19,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getBooks() {
-        return bookRepository.findAll();
+    public Page<Book> getBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByNameBook(String nameBook, String firstName, String lastName) {
-        return bookRepository.findByNameBookContainingAllIgnoreCaseOrAuthorsIgnoreCase_FirstNameOrAuthorsIgnoreCase_LastName(nameBook, firstName, lastName);
+    public Page<Book> findByNameBook(String nameBook, String firstName, String lastName, Pageable pageable) {
+        return bookRepository.findByNameBookContainingAllIgnoreCaseOrAuthorsIgnoreCase_FirstNameOrAuthorsIgnoreCase_LastName(nameBook, firstName, lastName, pageable);
     }
 }

@@ -5,6 +5,8 @@ import by.tms.bookstorecourseworkc33.service.AuthorService;
 import by.tms.bookstorecourseworkc33.service.AuthorServiceImpl;
 import by.tms.bookstorecourseworkc33.service.BookService;
 import by.tms.bookstorecourseworkc33.service.BookServiceImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -34,19 +36,19 @@ public class IndexController {
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = "/userBookList")
-    public ModelAndView listBook(ModelAndView modelAndView) {
-        modelAndView.addObject("books", bookService.getBooks());
+    public ModelAndView listBook(@PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
+        modelAndView.addObject("books", bookService.getBooks(pageable));
         modelAndView.setViewName("userBookList");
         return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("filter")
-    public ModelAndView filter(@RequestParam String filter, ModelAndView modelAndView) {
+    public ModelAndView filter(@RequestParam String filter, @PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
         if (filter != null && !filter.isEmpty()) {
-            modelAndView.addObject("books", bookService.findByNameBook(filter, filter, filter));
+            modelAndView.addObject("books", bookService.findByNameBook(filter, filter, filter, pageable));
         } else {
-            modelAndView.addObject("books", bookService.getBooks());
+            modelAndView.addObject("books", bookService.getBooks(pageable));
         }
         modelAndView.setViewName("userBookList");
         return modelAndView;
