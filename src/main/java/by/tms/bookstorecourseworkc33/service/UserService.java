@@ -2,12 +2,14 @@ package by.tms.bookstorecourseworkc33.service;
 
 import by.tms.bookstorecourseworkc33.entity.user.User;
 import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    List<User> findAll(User user);
+    Page<User> findAll(Pageable pageable);
 
     User findUserById(long id);
 

@@ -26,15 +26,27 @@ public class AddBookController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public ModelAndView listBook(@PageableDefault(size = 5) Pageable pageable,  ModelAndView modelAndView) {
+    public ModelAndView allListBook(@PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
         modelAndView.addObject("books", bookService.getBooks(pageable));
         modelAndView.setViewName("bookList");
         return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("filter")
+    public ModelAndView filter(@RequestParam String filter, @PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
+        if (filter != null && !filter.isEmpty()) {
+            modelAndView.addObject("books", bookService.findByNameBook(filter, filter, filter, pageable));
+        } else {
+            modelAndView.addObject("books", bookService.getBooks(pageable));
+        }
+        modelAndView.setViewName("bookList");
+        return modelAndView;
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    public ModelAndView getAllUsers(@PathVariable("id") long id, ModelAndView modelAndView) {
+    public ModelAndView getBookById(@PathVariable("id") long id, ModelAndView modelAndView) {
         Book findBook = bookService.findBookById(id);
         modelAndView.addObject("findBook", findBook);
         Author findAuthor = authorService.findAuthorById(findBook.getId());

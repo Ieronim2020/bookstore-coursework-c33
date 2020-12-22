@@ -5,6 +5,8 @@ import by.tms.bookstorecourseworkc33.entity.user.User;
 import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
 import by.tms.bookstorecourseworkc33.repository.UserRepository;
 import by.tms.bookstorecourseworkc33.service.exception.UserIsAlreadyRegisteredException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,8 +33,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> findAll(User user) {
-        return userRepository.findAll();
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     @Override

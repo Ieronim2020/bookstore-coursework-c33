@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List book</title>
+    <title>List book for admin</title>
     <style>
         td, th {
             border: 1px solid blue;
@@ -14,6 +14,12 @@
 <br>
 <li><a th:href="@{/}">Home</a></li>
 <li><a th:href="@{/book/newBook}">Add new book</a></li>
+
+<div>Search for a book by title and by author</div>
+<form method="post" action="/book/filter">
+    <input type="text" name="filter">
+    <button type="submit">Search</button>
+</form>
 <h4>Update, delete and add book</h4>
 <br>
 <ol>
@@ -45,16 +51,16 @@
 </ol>
 <div class="pagination-div">
     <span th:if="${books.hasPrevious()}">
-        <a th:href="@{/userBookList(page=${books.number-1},size=${books.size})}">Previous</a>
+        <a th:href="@{/book(page=${books.number-1},size=${books.size})}">Previous</a>
     </span>
     <th:block th:each="i: ${#numbers.sequence(0, books.totalPages - 1)}">
         <span th:if="${books.number == i}" class="selected">[[${i}+1]]</span>
         <span th:unless="${books.number == i}">
-             <a th:href="@{/userBookList(page=${i},size=${books.size})}">[[${i}+1]]</a>
+             <a th:href="@{/book(page=${i},size=${books.size})}">[[${i}+1]]</a>
         </span>
     </th:block>
     <span th:if="${books.hasNext()}">
-        <a th:href="@{/userBookList(page=${books.number+1},size=${books.size})}">Next</a>
+        <a th:href="@{/book(page=${books.number+1},size=${books.size})}">Next</a>
     </span>
 </div>
 </body>

@@ -21,8 +21,6 @@
             <th>Email</th>
             <th>Password</th>
             <th>Role</th>
-            <th></th>
-            <th></th>
         </tr>
         </thead>
         <tr th:each="item, status : ${users}">
@@ -37,5 +35,19 @@
         </tbody>
     </table>
 </ol>
+<div class="pagination-div">
+    <span th:if="${users.hasPrevious()}">
+        <a th:href="@{/admin(page=${users.number-1},size=${users.size})}">Previous</a>
+    </span>
+    <th:block th:each="i: ${#numbers.sequence(0, users.totalPages - 1)}">
+        <span th:if="${users.number == i}" class="selected">[[${i}+1]]</span>
+        <span th:unless="${users.number == i}">
+             <a th:href="@{/admin(page=${i},size=${users.size})}">[[${i}+1]]</a>
+        </span>
+    </th:block>
+    <span th:if="${users.hasNext()}">
+        <a th:href="@{/admin(page=${users.number+1},size=${users.size})}">Next</a>
+    </span>
+</div>
 </body>
 </html>

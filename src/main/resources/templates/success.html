@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Success</title>
 </head>
 <body>
-<li><a th:href="@{/}">Home</a></li>
-<li><a th:href="@{/userBookList}">List book</a></li>
+<div sec:authorize="isAuthenticated()">
+    <li><a th:href="@{/}">Home</a></li>
+</div>
+<div sec:authorize="hasAuthority('USER')">
+    <li><a th:href="@{/userBookList}">List book</a></li>
+    <li><a th:href="@{/order}">Cart</a></li>
+    <li><a th:href="@{/user}">User list</a></li>
+</div>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <li><a th:href="@{/admin}">Update and delete user</a></li>
+    <li><a th:href="@{/book}">Update and delete, add book</a></li>
+</div>
 <br>
 <h1>Congratulations. Registration completed successfully.</h1>
 <br>

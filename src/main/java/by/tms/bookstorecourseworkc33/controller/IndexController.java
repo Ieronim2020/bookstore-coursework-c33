@@ -36,7 +36,7 @@ public class IndexController {
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = "/userBookList")
-    public ModelAndView listBook(@PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
+    public ModelAndView allListBook(@PageableDefault(size = 5) Pageable pageable, ModelAndView modelAndView) {
         modelAndView.addObject("books", bookService.getBooks(pageable));
         modelAndView.setViewName("userBookList");
         return modelAndView;
