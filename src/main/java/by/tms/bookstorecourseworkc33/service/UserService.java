@@ -23,5 +23,5 @@ public interface UserService extends UserDetailsService {
 
     User loadUserByUsername(String username);
 
-    User findUserByEmail(String email);
+    Page<User> findByUsernameOrEmail(String username, String email, Pageable pageable);
 }

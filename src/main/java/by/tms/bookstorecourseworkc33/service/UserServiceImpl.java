@@ -1,5 +1,6 @@
 package by.tms.bookstorecourseworkc33.service;
 
+import by.tms.bookstorecourseworkc33.entity.Book;
 import by.tms.bookstorecourseworkc33.entity.user.Role;
 import by.tms.bookstorecourseworkc33.entity.user.User;
 import by.tms.bookstorecourseworkc33.entity.dto.UserDto;
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findUserByEmail(String email){
-        return userRepository.findByEmail(email);
+    public Page<User> findByUsernameOrEmail(String username, String email, Pageable pageable) {
+        return userRepository.findByUsernameContainingIgnoreCaseOrEmailContainingIgnoreCase(username, email, pageable);
     }
 }

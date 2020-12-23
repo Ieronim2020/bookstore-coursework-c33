@@ -11,6 +11,11 @@
 </head>
 <body>
 <li><a th:href="@{/}">Home</a></li>
+<div>Search for a book by title and by author</div>
+<form method="post" action="/admin/filter">
+    <input type="text" name="filter">
+    <button type="submit">Search</button>
+</form>
 <h4>Update and delete user</h4>
 <ol>
     <table>
